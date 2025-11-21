@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CrediSafe — Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    
+    :root{
+      --app-bg-color: #2da9da;
+      --text-color: #000;
+      --logo-font: 'Dancing Script', cursive;
+      --button-bg: #dac587;
+      --button-text: #000;
+      --certificate-frame: #3a5c9e;
+      --certificate-paper: #fff;
+      --medal-gold: #ffc107;
+      --scroll-red: #d9534f;
+      --line-color: #3a5c9e;
+      --background-blob: #aed6f1;
+      --scroll-end-color: #f7e0a3;
+    }
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      
+      background: linear-gradient(120deg, #6ee7b7, #93c5fd, #a5b4fc, #fbcfe8);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      font-family: Roboto, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    
+    .wave{
+      
+    }
+    .wave:nth-child(1){bottom:0;animation-duration:14s;opacity:.6}
+    .wave:nth-child(2){bottom:20px;animation-duration:10s;opacity:.4;background:rgba(255,255,255,0.35);}
+    .wave:nth-child(3){bottom:40px;animation-duration:18s;opacity:.3;background:rgba(255,255,255,0.2);}
+    @keyframes waveMove{
+      0%{transform:translateX(-25%)}
+      50%{transform:translateX(0%)}
+      100%{transform:translateX(-25%)}
+    }
+
+
+    .container {
+      width: 360px;
+      max-width:95%;
+      background-color: var(--app-bg-color);
+      padding: 22px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      transform-origin: center;
+      transition: opacity .45s ease, transform .45s ease;
+      position: relative;
+      z-index: 2; /* above waves */
+      overflow: hidden;
+    }
+    .container.fade-out { opacity: 0; transform: scale(.98); pointer-events: none; }
+
+   
+    .header { margin-bottom: 26px; }
+    .logo {
+      font-family: var(--logo-font);
+      font-size: 4.2rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1;
+      color: var(--text-color);
+      letter-spacing: -1px;
+      opacity: 0;
+      transform: translateY(-50px);
+      animation: fadeInSlideDown 1s ease-out forwards;
+      animation-delay: 0.45s;
+    }
+    .tagline {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-style: italic;
+      margin: 8px 0 0;
+      color: rgba(0,0,0,0.85);
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: fadeInSlideDown 1s ease-out forwards;
+      animation-delay: 0.75s;
+    }
+
+    /* ===== Certificate illustration & animations ===== */
+    .content { flex-grow:1; width:100%; display:flex; align-items:center; justify-content:center; position:relative; padding:6px 0 18px; }
+    .certificate-icon { width: 290px; height: 260px; position:relative; opacity:0; transform:scale(.86); animation: fadeInScaleUp 1s ease-out forwards; animation-delay: 1.25s; }
+
+    .background-blob {
+      position:absolute; inset:0;
+      background: var(--background-blob);
+      border-radius: 50% 60% 40% 50% / 60% 40% 50% 40%;
+      transform: scale(1.06);
+      z-index:0;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.08));
+      opacity:0; animation: fadeInScaleUp 0.8s ease-out forwards; animation-delay:1.4s;
+    }
+
+    .certificate-outline {
+      position:absolute; top: 38px; left: 22px; width: 240px; height: 160px;
+      background: var(--certificate-frame); border-radius: 7px; z-index:1;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      opacity:0; transform:translateY(-20px); animation: fadeInSlideDownSmall 0.8s ease-out forwards; animation-delay:1.6s;
+    }
+
+    .certificate-paper {
+      position:absolute; top:5px; left:5px; right:5px; bottom:5px;
+      background: var(--certificate-paper); border-radius:4px;
+      border-left: 10px solid var(--certificate-frame); border-right: 10px solid var(--certificate-frame);
+      padding: 18px 12px; box-sizing:border-box; display:flex; flex-direction:column; gap:8px;
+      opacity:0; animation: fadeIn 0.6s ease-out forwards; animation-delay:1.95s;
+    }
+
+    .paper-line {
+      width:80%; height:3px; background:var(--line-color); margin:0 auto; border-radius:2px;
+      opacity:0; transform:translateX(-20px); animation: fadeInSlideRight 0.5s ease-out forwards;
+    }
+    .paper-line:nth-child(1){ width:60%; animation-delay:2.05s }
+    .paper-line:nth-child(2){ width:90%; animation-delay:2.25s }
+    .paper-line:nth-child(3){ width:85%; animation-delay:2.45s }
+    .paper-line:nth-child(4){ width:70%; animation-delay:2.65s }
+    .paper-line:nth-child(5){ width:95%; animation-delay:2.85s }
+
+    .medal-seal {
+      position:absolute; top:-6px; left:50%; transform:translateX(-50%) scale(0);
+      width:54px; height:54px; background:var(--medal-gold); border-radius:50%; z-index:3;
+      border:3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.35);
+      opacity:0; animation: popIn 0.6s cubic-bezier(0.68,-0.55,0.27,1.55) forwards; animation-delay:1.9s;
+    }
+    .medal-seal::before {
+      content:''; position:absolute; bottom:-22px; left:50%; transform:translateX(-50%) translateY(20px);
+      width:22px; height:22px; background:var(--medal-gold); clip-path: polygon(0 0,100% 0,75% 100%,25% 100%);
+      opacity:0; animation: fadeInSlideUpSmall 0.5s ease-out forwards; animation-delay:2.35s;
+    }
+
+    .diploma-scroll {
+      position:absolute; bottom:14px; right:0; width:140px; height:44px;
+      background: var(--scroll-red); border-radius:20px; z-index:4;
+      transform: rotate(-12deg) translateX(0px);
+      box-shadow:6px 6px 14px rgba(0,0,0,0.12);
+      opacity:0; animation: fadeInSlideLeft 0.8s ease-out forwards; animation-delay:2.6s;
+    }
+    .diploma-scroll::before, .diploma-scroll::after {
+      content:''; position:absolute; width:22px; height:44px; background:var(--scroll-end-color); border-radius:20px;
+    }
+    .diploma-scroll::before{ left:0 } .diploma-scroll::after{ right:0 }
+
+    .scroll-ribbon {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scaleX(0);
+      width:100%; height:12px; background:var(--scroll-end-color); border-radius:8px;
+      opacity:0; animation: fadeInScaleX 0.5s ease-out forwards; animation-delay:3.1s;
+    }
+
+    /* ===== Footer & Start button animation ===== */
+    .footer{ width:100%; padding:18px 0 6px; display:flex; justify-content:center; }
+    .start-button{
+      background: var(--button-bg); color: var(--button-text); border:none; border-radius:8px;
+      padding:12px 40px; font-size:1.05rem; font-weight:500; cursor:pointer;
+      box-shadow:0 6px 0 rgba(0,0,0,0.08); transition: transform .12s, box-shadow .12s;
+      font-family: 'Roboto', sans-serif; text-transform: lowercase;
+      opacity:0; transform:translateY(50px); animation: fadeInSlideUp 1s ease-out forwards; animation-delay:3.5s;
+    }
+    .start-button:active{ transform: translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,0.06); }
+    .start-button:focus{ outline:2px solid rgba(0,0,0,0.08); }
+
+    .muted { font-size:13px; color: rgba(0,0,0,0.65); margin-top:8px; }
+
+    /* ===== Keyframes (reused & added) ===== */
+    @keyframes fadeInSlideDown { from {opacity:0; transform:translateY(-50px)} to {opacity:1; transform:translateY(0)} }
+    @keyframes fadeInScaleUp { from {opacity:0; transform:scale(.8)} to {opacity:1; transform:scale(1)} }
+    @keyframes fadeInSlideUp { from {opacity:0; transform:translateY(50px)} to {opacity:1; transform:translateY(0)} }
+    @keyframes fadeInSlideDownSmall { from {opacity:0; transform:translateY(-20px)} to {opacity:1; transform:translateY(0)} }
+    @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+    @keyframes fadeInSlideRight { from {opacity:0; transform:translateX(-20px)} to {opacity:1; transform:translateX(0)} }
+    @keyframes popIn { 0%{opacity:0; transform:translateX(-50%) scale(0)} 70%{opacity:1; transform:translateX(-50%) scale(1.1)} 100%{opacity:1; transform:translateX(-50%) scale(1)} }
+    @keyframes fadeInSlideUpSmall { from {opacity:0; transform:translateX(-50%) translateY(20px)} to {opacity:1; transform:translateX(-50%) translateY(0)} }
+    @keyframes fadeInSlideLeft { from {opacity:0; transform:rotate(-15deg) translateX(50px)} to {opacity:1; transform:rotate(-15deg) translateX(0)} }
+    @keyframes fadeInScaleX { from {opacity:0; transform:translate(-50%,-50%) scaleX(0)} to {opacity:1; transform:translate(-50%,-50%) scaleX(1)} }
+  </style>
+</head>
+<body>
+  <!-- Floating waves background (behind the card) -->
+  <div class="wave" aria-hidden="true"></div>
+  <div class="wave" aria-hidden="true"></div>
+  <div class="wave" aria-hidden="true"></div>
+
+  <div class="container" id="landing">
+    <header class="header">
+      <h1 class="logo">CrediSafe</h1>
+      <p class="tagline">"Smart Verification, Zero Doubt"</p>
+    </header>
+
+    <main class="content" aria-hidden="false">
+      <div class="certificate-icon" role="img" aria-label="Certificate illustration">
+        <div class="background-blob" aria-hidden="true"></div>
+
+        <div class="certificate-outline" aria-hidden="true">
+          <div class="certificate-paper" aria-hidden="true">
+            <div class="paper-line"></div>
+            <div class="paper-line"></div>
+            <div class="paper-line"></div>
+            <div class="paper-line"></div>
+            <div class="paper-line"></div>
+          </div>
+        </div>
+
+        <div class="medal-seal" aria-hidden="true"></div>
+
+        <div class="diploma-scroll" aria-hidden="true">
+          <div class="scroll-ribbon" aria-hidden="true"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <button id="startBtn" class="start-button" aria-label="Open CrediSafe app">Let' start</button>
+    </footer>
+    <div class="muted">Click start to inspect your first certificate</div>
+  </div>
+
+  <script>
+    (function(){
+      const landing = document.getElementById('landing');
+      const btn = document.getElementById('startBtn');
+
+      // Page to open (change if analyzer file has a different name)
+      const TARGET_PAGE = 'index.html';
+
+      function goToMain(){
+        // fade out then navigate (gives a smooth transition)
+        landing.classList.add('fade-out');
+        setTimeout(()=> window.location.href = TARGET_PAGE, 420);
+      }
+
+      btn.addEventListener('click', goToMain);
+      btn.addEventListener('keyup', e => { if(e.key === 'Enter' || e.key === ' ') goToMain(); });
+      btn.addEventListener('keydown', e => {
+        if((e.ctrlKey || e.metaKey) && e.key === 'Enter') window.open(index.html, '_blank');
+      });
+    })();
+  </script>
+</body>
+</html>
