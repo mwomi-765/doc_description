@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Certificate Analyzer + Compare</title>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.8.162/pdf.min.js"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>Smart Certificate Analyzer + Compare</h1>
+
+    <section class="box" id="analyzerBox">
+      <h2>Analyze single certificate</h2>
+      <input type="file" id="inputFile" accept=".pdf,image/*">
+      <div class="row">
+        <button id="analyzeBtn">Analyze</button>
+      </div>
+      <div id="status" class="muted"></div>
+      <progress id="progress" value="0" max="100" class="progress"></progress>
+    </section>
+
+    <section class="box">
+      <h2>Summary & Verdict</h2>
+      <div id="summary" class="result"></div>
+    </section>
+
+    <section class="box">
+      <h2>Signals & Details</h2>
+      <div id="signals" class="result"></div>
+    </section>
+
+    <section class="box">
+      <h2>Visuals</h2>
+      <div class="two-col">
+        <div class="col">
+          <h4>Rendered Image</h4>
+          <canvas id="renderCanvas"></canvas>
+        </div>
+        <div class="col">
+          <h4>ELA (Error Level Analysis)</h4>
+          <canvas id="elaCanvas"></canvas>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <h4>Edge Map (structure)</h4>
+        <canvas id="edgeCanvas"></canvas>
+      </div>
+    </section>
+
+    <section class="box" id="compareBox">
+      <h2>Compare Mode (Trusted vs Suspect)</h2>
+      <div class="row">
+        <div style="flex:1">
+          <label class="inline-label"><strong>Trusted (known-good):</strong></label><br/>
+          <input type="file" id="trustedFile" accept=".pdf,image/*">
+        </div>
+        <div style="flex:1">
+          <label class="inline-label"><strong>Suspect (to test):</strong></label><br/>
+          <input type="file" id="suspectFile" accept=".pdf,image/*">
+        </div>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button id="compareBtn">Compare</button>
+        <button id="downloadReportBtn">Download Last Report</button>
+      </div>
+      <div id="compareStatus" class="muted"></div>
+      <div id="compareResult" class="result"></div>
+    </section>
+
+    <footer class="muted small">Prototype analyzer: use results for triage, not as legal proof.</footer>
+    <footer style="color:chartreuse">Made with ❤️ · CrediSafe ·</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
