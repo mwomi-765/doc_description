@@ -1,4 +1,5 @@
 # CrediSafe -Smart Certificate Authenticity Verification
+<img src="logo.png" width="300">
 
 
 CrediSafe is an AI-powered, browser-based tool that detects forged academic certificates using image forensics, Error-Level Analysis (ELA), pixel differences, hashing, and layout intelligence.
